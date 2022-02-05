@@ -1,9 +1,18 @@
-FROM tomcat:8.0-alpine
+#
+# Build stage
+#
+FROM maven:3.6.0-jdk-11-slim AS build
+COPY src /home/app/src
+COPY pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean compile assembly:single
 
-LABEL maintainer=”s.bachu@arkoselabs.com”
 
-ADD /target/CiPoc.war  /usr/local/tomcat/webapps/
 
+
+#
+# Package stage
+#
+FROM openjdk:11-jre-slim
+COPY --from=build /home/app/target/CiPoc-jar-with-dependencies.jar /usr/local/lib/demo.jar
 EXPOSE 8080
-
-CMD [“catalina.sh”, “run”]
+ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]
