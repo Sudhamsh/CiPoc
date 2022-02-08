@@ -12,7 +12,7 @@ RUN mvn -f /home/app/pom.xml clean compile assembly:single
 #
 # Package stage
 #
-FROM openjdk:11-jre-slim
+FROM openjdk:11
 COPY --from=build /home/app/target/CiPoc-jar-with-dependencies.jar /usr/local/lib/demo.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]
+CMD ["java","-jar","/usr/local/lib/demo.jar"]
