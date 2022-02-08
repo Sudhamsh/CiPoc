@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-
+.claspath
 # Log file
 *.log
 
