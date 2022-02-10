@@ -12,7 +12,7 @@ public class StatusServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_OK);
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         response.getWriter().println("{ \"status\":  \"ok\",");
         response.getWriter().println(" \"version\": \""+version+"\"}");
     }
