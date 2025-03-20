@@ -9,6 +9,10 @@ spec:
     blueGreen:
       activeService: my-app-active
       previewService: my-app-preview
+      scalingStrategy: Stable
+      steps:
+        - setWeight: 100
+        - pause: {}
       autoPromotionEnabled: true
       autoPromotionSeconds: 60
       scalingStrategy: Stable
