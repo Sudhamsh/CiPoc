@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: my-app-bluegreen-rollout
+  namespace: default
+spec:
+  replicas: 3
+  strategy:
+    blueGreen:
+      activeService: my-app-active
+      previewService: my-app-preview
+      autoPromotionEnabled: true
+      autoPromotionSeconds: 60
+      scalingStrategy: Stable
+      steps:
+        - setWeight: 100
+        - pause: {}
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: nginx  # Update to the new version
+        ports:
+        - containerPort: 8080
+  pause: false
+  progressDeadlineSeconds: 600
