@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: my-app-container
-        image: nginx  # Update to the new version
+        image: nginx:stable-perl  # Update to the new version
         ports:
         - containerPort: 8080
   pause: false
