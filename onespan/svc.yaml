@@ -6,7 +6,6 @@ metadata:
 spec:
   selector:
     app: my-app
-    rollout.argoproj.io/pod-template-hash: "blue"  # Label to select the "blue" pods (current stable version)
   ports:
     - protocol: TCP
       port: 80
@@ -21,7 +20,6 @@ metadata:
 spec:
   selector:
     app: my-app
-    rollout.argoproj.io/pod-template-hash: "green"  # Label to select the "green" pods (new version)
   ports:
     - protocol: TCP
       port: 80
